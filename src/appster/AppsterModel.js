@@ -38,6 +38,9 @@ export default class AppsterModel {
 
             // CHANGE THE SCREEN
             this.view.goToEditScreen();
+
+            //set current work
+            this.currentWork = work;
         }
     }
 
@@ -81,9 +84,13 @@ export default class AppsterModel {
      */
     removeWork(workToRemove) {
         // REMOVE IT IF IT EXISTS
+        console.log("work to remove");
+        console.log(workToRemove);
         let indexOfWork = this.recentWork.indexOf(workToRemove);
         if (indexOfWork >= 0)
             this.recentWork.splice(indexOfWork, 1);
+        console.log("recent work after work removed");
+        console.log(this.recentWork);
         this.view.reloadRecentWorkLinks(this.recentWork);
     }
 
@@ -122,5 +129,11 @@ export default class AppsterModel {
         this.listToEdit = this.createNewWork();
         this.prependList(this.listToEdit);
         this.view.loadListData(this.listToEdit);
+    }
+
+    getWorkToEdit() {
+        console.log("current work");
+        console.log(this.currentWork);
+        return this.currentWork;
     }
 }
