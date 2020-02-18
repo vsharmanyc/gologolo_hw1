@@ -136,4 +136,10 @@ export default class AppsterModel {
         console.log(this.currentWork);
         return this.currentWork;
     }
+
+    goList(){
+        console.log("goList");
+        this.loadNewList;
+        
+    }
 }

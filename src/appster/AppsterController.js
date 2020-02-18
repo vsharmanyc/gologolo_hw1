@@ -1,4 +1,5 @@
 import {AppsterCallback, AppsterGUIId, AppsterHTML} from './AppsterConstants.js'
+import AppWork from './AppWork.js'
 
 export default class AppsterController {
     constructor() {
@@ -96,7 +97,7 @@ export default class AppsterController {
         this.model.view.showInputDialog();
         
         // MAKE A BRAND NEW LIST
-        this.model.goList();
+            this.model.goList();
     }
 
     /**
@@ -172,27 +173,32 @@ export default class AppsterController {
 
     processEnterTextInput = () => {
         let input = document.getElementById(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL_TEXTFIELD).value;
-        if(input.length >= 1 && this.model.recentWork.every(work => work.name != input)) 
-            console.log("gucci");
+        if(input.length >= 1 && this.model.recentWork.every(work => work.name != input)){
+            console.log("name input is valid");
+            this.model.recentWork.unshift(new AppWork(input));
+        }
         else{
             this.model.view.hideInputDialog();
-            if(input.length < 1){
-                let html = document.getElementById(AppsterGUIId.APPSTER_CONFIRM_MODAL).innerHTML;
-                html = html.replace("logo already exists with that name","name must be at least one character long");
-                html = html.replace("Duplicate Name","Empty Name");
-                document.getElementById(AppsterGUIId.APPSTER_CONFIRM_MODAL).innerHTML = html;
-            }
+            if(input.length < 1)
+                this.setConfirmModal("Illegal name, name must be at least one character long","Empty Name");
+            else
+                this.setConfirmModal("Illegal name, logo already exists with that name","Duplicate Name");
             this.model.view.showConfirmDialog();
         }
-
     }
 
     processConfirmOk = () => {
-        let html = document.getElementById(AppsterGUIId.APPSTER_CONFIRM_MODAL).innerHTML;
-        html = html.replace("name must be at least one character long", "logo already exists with that name");
-        html = html.replace("Empty Name","Duplicate Name");
-        document.getElementById(AppsterGUIId.APPSTER_CONFIRM_MODAL).innerHTML = html;
         this.model.view.hideConfirmDialog();
+    }
+
+    //sets confirm modal section and footer
+    setConfirmModal(section,footer){
+        let html = document.getElementById(AppsterGUIId.APPSTER_CONFIRM_MODAL).innerHTML;
+        html = html.replace(/class="appster_modal_section"><p><strong>.*<\/strong>/,
+        "class=\"appster_modal_section\"><p><strong>" + section + "</strong>");
+        html = html.replace(/class="appster_modal_footer">.*<\/undefined>/,
+        "class=\"appster_modal_footer\">" + footer + "</undefined>");
+        document.getElementById(AppsterGUIId.APPSTER_CONFIRM_MODAL).innerHTML = html;
     }
     
 }
