@@ -38,6 +38,8 @@ export default class AppsterController {
         // AND THE MODAL BUTTONS
         this.registerEventHandler(AppsterGUIId.APPSTER_YES_NO_MODAL_YES_BUTTON, AppsterHTML.CLICK, this[AppsterCallback.APPSTER_PROCESS_CONFIRM_DELETE_WORK]);
         this.registerEventHandler(AppsterGUIId.APPSTER_YES_NO_MODAL_NO_BUTTON, AppsterHTML.CLICK, this[AppsterCallback.APPSTER_PROCESS_CANCEL_DELETE_WORK]);
+        this.registerEventHandler(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL_CANCEL_BUTTON, AppsterHTML.CLICK, this[AppsterCallback.APPSTER_PROCESS_CANCEL_TEXT_INPUT]);
+        this.registerEventHandler(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL_ENTER_BUTTON, AppsterHTML.CLICK, this[AppsterCallback.APPSTER_PROCESS_ENTER_TEXT_INPUT]);
     }
 
     /**
@@ -86,10 +88,11 @@ export default class AppsterController {
      * This function is called when the user requests to create
      * new work.
      */
-    processCreateNewWork() {
+    processCreateNewWork = () =>{
         console.log("processCreateNewWork");
 
         // PROMPT FOR THE NAME OF THE NEW LIST
+        this.model.view.showInputDialog();
         
         // MAKE A BRAND NEW LIST
         this.model.goList();
@@ -161,4 +164,18 @@ export default class AppsterController {
         // VERIFY VIA A DIALOG BOX
         this.model.view.showDialog();
     }
+
+    processCancelTextInput = () => {
+        this.model.view.hideInputDialog();
+    }
+
+    processEnterTextInput = () => {
+        let input = document.getElementById(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL_TEXTFIELD).value;
+        if(input.length >= 1 && this.model.recentWork.every(work => work.name != input)) 
+            console.log("gucci");
+        else
+            console.log("not gucci");
+        
+    }
+    
 }

@@ -25,7 +25,9 @@ export const AppsterCallback = {
     APPSTER_PROCESS_GO_HOME: "processGoHome",
     APPSTER_PROCESS_DELETE_WORK: "processDeleteWork",
     APPSTER_PROCESS_CONFIRM_DELETE_WORK: "processConfirmDeleteWork",
-    APPSTER_PROCESS_CANCEL_DELETE_WORK: "processCancelDeleteWork"
+    APPSTER_PROCESS_CANCEL_DELETE_WORK: "processCancelDeleteWork",
+    APPSTER_PROCESS_CANCEL_TEXT_INPUT: "processCancelTextInput",
+    APPSTER_PROCESS_ENTER_TEXT_INPUT: "processEnterTextInput"
 };
 
 /**
@@ -143,7 +145,8 @@ export const AppsterHTML = {
   * and scale well.
   */
  export const AppsterSymbols = {
-    DELETE: "&#128465;"     // TRASH SYMBOL
+    DELETE: "&#128465;",     // TRASH SYMBOL
+    EDIT: "&#x270e;"         // EDIT SYMBOL
 };
 
 export const AppsterText = {
