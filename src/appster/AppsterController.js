@@ -40,6 +40,7 @@ export default class AppsterController {
         this.registerEventHandler(AppsterGUIId.APPSTER_YES_NO_MODAL_NO_BUTTON, AppsterHTML.CLICK, this[AppsterCallback.APPSTER_PROCESS_CANCEL_DELETE_WORK]);
         this.registerEventHandler(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL_CANCEL_BUTTON, AppsterHTML.CLICK, this[AppsterCallback.APPSTER_PROCESS_CANCEL_TEXT_INPUT]);
         this.registerEventHandler(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL_ENTER_BUTTON, AppsterHTML.CLICK, this[AppsterCallback.APPSTER_PROCESS_ENTER_TEXT_INPUT]);
+        this.registerEventHandler(AppsterGUIId.APPSTER_CONFIRM_MODAL, AppsterHTML.CLICK, this[AppsterCallback.APPSTER_PROCESS_CONFIRM_OK]);
     }
 
     /**
@@ -173,9 +174,25 @@ export default class AppsterController {
         let input = document.getElementById(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL_TEXTFIELD).value;
         if(input.length >= 1 && this.model.recentWork.every(work => work.name != input)) 
             console.log("gucci");
-        else
-            console.log("not gucci");
-        
+        else{
+            this.model.view.hideInputDialog();
+            if(input.length < 1){
+                let html = document.getElementById(AppsterGUIId.APPSTER_CONFIRM_MODAL).innerHTML;
+                html = html.replace("logo already exists with that name","name must be at least one character long");
+                html = html.replace("Duplicate Name","Empty Name");
+                document.getElementById(AppsterGUIId.APPSTER_CONFIRM_MODAL).innerHTML = html;
+            }
+            this.model.view.showConfirmDialog();
+        }
+
+    }
+
+    processConfirmOk = () => {
+        let html = document.getElementById(AppsterGUIId.APPSTER_CONFIRM_MODAL).innerHTML;
+        html = html.replace("name must be at least one character long", "logo already exists with that name");
+        html = html.replace("Empty Name","Duplicate Name");
+        document.getElementById(AppsterGUIId.APPSTER_CONFIRM_MODAL).innerHTML = html;
+        this.model.view.hideConfirmDialog();
     }
     
 }

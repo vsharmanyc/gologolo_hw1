@@ -525,7 +525,7 @@ export default class AppsterView {
     }
 
     /**
-     * This method is for hiding the yes/no dialog.
+     * This method is for hiding the create new logo input dialog.
      */
     hideInputDialog() {
         let dialog = document.getElementById(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL);
@@ -533,12 +533,27 @@ export default class AppsterView {
     }
 
     /**
-     * This method is for showing the yes/no dialog.
+     * This method is for showing the create new logo input dialog.
      */
     showInputDialog() {
         let dialog = document.getElementById(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL);
         dialog.classList.add(AppsterGUIClass.IS_VISIBLE);
     }
 
+    /**
+     * This method is for hiding the confirm dialog.
+     */
+    hideConfirmDialog() {
+        let dialog = document.getElementById(AppsterGUIId.APPSTER_CONFIRM_MODAL);
+        dialog.classList.remove(AppsterGUIClass.IS_VISIBLE);
+    }
+
+    /**
+     * This method is for showing the confirm input dialog.
+     */
+    showConfirmDialog() {
+        let dialog = document.getElementById(AppsterGUIId.APPSTER_CONFIRM_MODAL);
+        dialog.classList.add(AppsterGUIClass.IS_VISIBLE);
+    }
 
 }
