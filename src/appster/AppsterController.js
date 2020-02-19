@@ -176,7 +176,7 @@ export default class AppsterController {
         if(input.length >= 1 && this.model.recentWork.every(work => work.name != input)){
             console.log("name input is valid");
             this.model.prependWork(this.model.createNewWork(input));
-            this.model.goList();
+            this.model.editWork(input);
             this.model.view.hideInputDialog();
         }
         else{

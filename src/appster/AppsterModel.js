@@ -8,8 +8,11 @@ export default class AppsterModel {
     }
 
     getRecentWork(workName) {
+        console.log("getRecentWork .. workName : " + workName);
         for (let i = 0; i < this.recentWork.length; i++) {
             let testWork = this.recentWork[i];
+            console.log("testWork.getName() : " + testWork.getName());
+            console.log("workName : " + workName);
             if (testWork.getName() === workName)
                 return testWork;
         }
@@ -138,8 +141,6 @@ export default class AppsterModel {
     }
 
     goList(){
-        if(this.recentWork != []){
-            this.currentWork = this.recentWork[0];
-        }
+
     }
 }
