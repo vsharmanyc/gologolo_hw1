@@ -1,5 +1,4 @@
 import {AppsterCallback, AppsterGUIId, AppsterHTML} from './AppsterConstants.js'
-import AppWork from './AppWork.js'
 
 export default class AppsterController {
     constructor() {
@@ -169,13 +168,16 @@ export default class AppsterController {
 
     processCancelTextInput = () => {
         this.model.view.hideInputDialog();
+        document.getElementById(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL_TEXTFIELD).value = "";
     }
 
     processEnterTextInput = () => {
         let input = document.getElementById(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL_TEXTFIELD).value;
         if(input.length >= 1 && this.model.recentWork.every(work => work.name != input)){
             console.log("name input is valid");
-            this.model.recentWork.unshift(new AppWork(input));
+            this.model.prependWork(this.model.createNewWork(input));
+            this.model.goList();
+            this.model.view.hideInputDialog();
         }
         else{
             this.model.view.hideInputDialog();
@@ -185,6 +187,7 @@ export default class AppsterController {
                 this.setConfirmModal("Illegal name, logo already exists with that name","Duplicate Name");
             this.model.view.showConfirmDialog();
         }
+        document.getElementById(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL_TEXTFIELD).value = "";
     }
 
     processConfirmOk = () => {
@@ -200,5 +203,5 @@ export default class AppsterController {
         "class=\"appster_modal_footer\">" + footer + "</undefined>");
         document.getElementById(AppsterGUIId.APPSTER_CONFIRM_MODAL).innerHTML = html;
     }
-    
+     
 }

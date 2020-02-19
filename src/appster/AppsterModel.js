@@ -138,8 +138,8 @@ export default class AppsterModel {
     }
 
     goList(){
-        console.log("goList");
-        this.loadNewList;
-        
+        if(this.recentWork != []){
+            this.currentWork = this.recentWork[0];
+        }
     }
 }
