@@ -22,6 +22,9 @@ export default class AppsterController {
         // GET THE CONTROL IN THE GUI WITH THE CORRESPONDING id
         let control = document.getElementById(id);
 
+        console.log('registerEvent for : ' + id);
+        console.log('control == null : ' + control);
+
         // AND SETUP THE CALLBACK FOR THE SPECIFIED EVENT TYPE
         if (control)
             control.addEventListener(eventName, callback);
@@ -41,6 +44,9 @@ export default class AppsterController {
         this.registerEventHandler(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL_CANCEL_BUTTON, AppsterHTML.CLICK, this[AppsterCallback.APPSTER_PROCESS_CANCEL_TEXT_INPUT]);
         this.registerEventHandler(AppsterGUIId.APPSTER_TEXT_INPUT_MODAL_ENTER_BUTTON, AppsterHTML.CLICK, this[AppsterCallback.APPSTER_PROCESS_ENTER_TEXT_INPUT]);
         this.registerEventHandler(AppsterGUIId.APPSTER_CONFIRM_MODAL, AppsterHTML.CLICK, this[AppsterCallback.APPSTER_PROCESS_CONFIRM_OK]);
+
+        // subclass controls
+        this.registerEventHandlers();
     }
 
     /**
@@ -202,6 +208,11 @@ export default class AppsterController {
         html = html.replace(/class="appster_modal_footer">.*<\/undefined>/,
         "class=\"appster_modal_footer\">" + footer + "</undefined>");
         document.getElementById(AppsterGUIId.APPSTER_CONFIRM_MODAL).innerHTML = html;
+    }
+
+    customInputPrompt(section,footer){
+        this.setInputModal(section,footer);
+        this.model.view.showInputDialog();
     }
      
 }

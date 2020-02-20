@@ -117,6 +117,9 @@ export default class AppsterView {
             if (text) {
                 element.innerHTML = text;
             }
+            else{
+                element.innerHTML = textId;
+            }
             this.registerAppTextControl(idValue, element);
         }
         if (dataAnimation) {
@@ -187,12 +190,17 @@ export default class AppsterView {
         toolbarDiv.appendChild(headerDiv);
         toolbarDiv.appendChild(trash);
         let editScreenDiv = this.buildElement(AppsterHTML.DIV, AppsterGUIId.APPSTER_EDIT_SCREEN);
+        console.log("why");
+        console.log(document.getElementById(AppsterGUIId.APPSTER_EDIT_SCREEN));
         editScreenDiv.appendChild(toolbarDiv);
 
         // THIS IS APP-SPECIFIC AND WILL BE DONE BY THE CHILD CLASS
         let workspace = this.buildElement(AppsterHTML.DIV, AppsterGUIId.APPSTER_EDIT_WORKSPACE);
         this.fillAppWorkspace(workspace);
         editScreenDiv.appendChild(workspace);
+
+        let modal = this.getEditScreenModals();
+        editScreenDiv.appendChild(modal);
         return editScreenDiv;
     }
 
