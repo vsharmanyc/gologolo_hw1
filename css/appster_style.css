@@ -78,7 +78,7 @@ body {
     cursor: pointer;
 }
 #appster_edit_workspace {
-
+    overflow: auto;
 }
 #gologolo_toolbar {
     background-color: var(--swatch-accent);

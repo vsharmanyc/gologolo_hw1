@@ -75,14 +75,14 @@ export default class GoLogoLoView extends AppsterView {
         let fontSizeSlider = document.getElementById(GoLogoLoGUIId.GOLOGOLO_FONT_SIZE_SLIDER);
         fontSizeSlider.value = work.getFontSize();
         let textColorPicker = document.getElementById(GoLogoLoGUIId.GOLOGOLO_TEXT_COLOR_PICKER);
-        textColorPicker.value = work.getTextColor();
+        textColorPicker.value = work.getTextColor();''
         let backgroundColorPicker = document.getElementById(GoLogoLoGUIId.GOLOGOLO_BACKGROUND_COLOR_PICKER);
         backgroundColorPicker.value = work.getBackgroundColor();
         let borderColorPicker = document.getElementById(GoLogoLoGUIId.GOLOGOLO_BORDER_COLOR_PICKER);
         borderColorPicker.value = work.getBorderColor();
         let borderRadiusSlider = document.getElementById(GoLogoLoGUIId.GOLOGOLO_BORDER_RADIUS_SLIDER);
         borderRadiusSlider.value = work.getBorderRadius();
-        let borderThicknessSlider = document.getElementById(GoLogoLoGUIId.GOLOGOLO_BORDER_RADIUS_SLIDER);
+        let borderThicknessSlider = document.getElementById(GoLogoLoGUIId.GOLOGOLO_BORDER_THICKNESS_SLIDER);
         borderThicknessSlider.value = work.getBorderThickness();
         let paddingSlider = document.getElementById(GoLogoLoGUIId.GOLOGOLO_PADDING_SLIDER);
         paddingSlider.value = work.getPadding();
@@ -93,11 +93,16 @@ export default class GoLogoLoView extends AppsterView {
 
     loadWorkStyle(work) {
         let textDiv = document.getElementById(GoLogoLoGUIId.GOLOGOLO_TEXT);
+        textDiv.textContent = work.getText();
+        textDiv.style.fontSize = work.getFontSize() + "px";
         textDiv.style.color = work.getTextColor();
         textDiv.style.backgroundColor = work.getBackgroundColor();
         textDiv.style.borderColor = work.getBorderColor();
-        textDiv.style.borderRadius = work.getBorderRadius();
-        textDiv.style.borderThickness = work.getBorderThickness();
+        textDiv.style.borderRadius = work.getBorderRadius() + "px";
+        textDiv.style.borderWidth = work.getBorderThickness() + "px";
+        textDiv.style.borderStyle = work.getBorderType();
+        textDiv.style.padding = work.getPadding() + "px";
+        textDiv.style.margin = work.getMargin() + "px";
     }
 
     addListItem(initText) {
@@ -151,7 +156,7 @@ export default class GoLogoLoView extends AppsterView {
             "",
             [],
             [],
-            "Edit the logo text: ");
+            "Edit the following logo text:");
         let textFieldAttributes = [];
         textFieldAttributes[AppsterHTML.TYPE] = AppsterHTML.TEXT;
         let textField = this.buildElement(AppsterHTML.INPUT,
