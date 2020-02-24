@@ -2,7 +2,7 @@ import AppsterController from '../appster/AppsterController.js'
 import {GoLogoLoGUIId, GoLogoLoCallback} from './GoLogoLoConstants.js'
 import {AppsterCallback, AppsterGUIId, AppsterHTML} from '../Appster/AppsterConstants.js'
 
-export default class GoLogoLoController+
+export default class GoLogoLoController
  extends AppsterController {
     constructor() {
         super();
